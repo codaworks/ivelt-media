@@ -23,6 +23,13 @@
     iframe {
         z-index: 10;
     }
+    
+    video {
+        z-index: 10;
+        display: block;
+        width: 300px;
+        height: 169px;
+    }
 }
 
 @keyframes pulse {

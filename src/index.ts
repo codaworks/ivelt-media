@@ -1,37 +1,59 @@
-const posts = document.querySelectorAll('.postprofile + .postbody .content')
+const posts = document.querySelectorAll('.postprofile + .postbody .content, #preview .postbody .content')
 
 for (const post of posts) {
-    const links = post.querySelectorAll('.content > :not(blockquote) a[href^="https://drive.google.com/"], .content > a[href^="https://drive.google.com/"')
+    const links = post.querySelectorAll(`
+    .content > a[href^="https://drive.google.com/file/d/"],
+    .content > :not(blockquote) a[href^="https://drive.google.com/file/d/"],
+    .content > a[href^="https://www.dropbox.com/"][href$="&dl=0"], 
+    .content > :not(blockquote) a[href^="https://www.dropbox.com"][href$="&dl=0"]
+    `)
     if (!links.length)
         continue
 
     const media = [...links].map(l => {
-        const href = l.getAttribute('href')
-        if (!href)
-            return
-        const id = /^https:\/\/drive.google.com\/file\/d\/([^/]+)/.exec(href)?.[1]
-        if (!id)
-            return
+        const href = l.getAttribute('href') as string
+
+        let id: string | undefined
+        let type: 'google-drive' | 'dropbox'
+
+        if (href.startsWith('https://drive.google.com')) {
+            id = /^https:\/\/drive.google.com\/file\/d\/([^/]+)/.exec(href)?.[1]
+            type = 'google-drive'
+        }
+
+        else if (href.startsWith('https://www.dropbox.com')) {
+            id = /^(.+)\&dl=0/.exec(href)?.[1]
+            type = 'dropbox'
+        }
 
         return {
             title: l.textContent ?? href,
             href,
-            id
+            id,
+            type: type!
         }
-    }).filter(x => x != null)
+    })
 
-    post.insertAdjacentHTML('afterend', `<div class='ivelt-media__root'>
+
+    post.insertAdjacentHTML('afterend',
+        `<div class='ivelt-media__root'>
         ${media.map(m => `<div class='container'>
             <div class='skeleton'></div>
-            <iframe 
-                class='loading' 
-                src='https://drive.google.com/file/d/${m!.id}/preview' 
-                frameborder='0' 
-                width='300'
-                height='169'
-                allowfullscreen>
-                Your browser does not support this content
-            </iframe>
+            ${m.type === 'google-drive' ?
+                `<iframe 
+                    src='https://drive.google.com/file/d/${m.id}/preview' 
+                    frameborder='0' 
+                    width='300'
+                    height='169'
+                    allowfullscreen>
+                    Your browser does not support this content
+                </iframe>`
+                :
+                `<video controls preview='metadata'>
+                    <source src='${m.id}&raw=1'/>
+                    Your browser does not support this content
+                </video>`
+            }
         </div>`).join('')}
     </div>`)
 }

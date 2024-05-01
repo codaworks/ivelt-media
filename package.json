@@ -1,16 +1,17 @@
 {
   "name": "ivelt-media",
   "displayName": "Ivelt Media",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Mordechai Meisels",
-  "description": "",
+  "description": "Adds embedded media players for linked media in ivelt.com posts.",
   "type": "module",
   "license": "MIT",
   "keywords": [
-    "chrome-extension",
-    "vanilla",
-    "vite",
-    "create-chrome-ext"
+    "ivelt",
+    "video",
+    "drive",
+    "dropbox",
+    "media"
   ],
   "engines": {
     "node": ">=14.18.0"
