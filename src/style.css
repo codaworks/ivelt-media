@@ -1,5 +1,5 @@
 .ivelt-media__root {
-    reset: all;
+    all: unset;
     margin-top: 1.5rem;
     padding: .75rem;
     border-left: solid #60a5fa 3px;
