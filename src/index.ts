@@ -22,7 +22,7 @@ for (const post of posts) {
         }
 
         else if (href.startsWith('https://www.dropbox.com')) {
-            id = /^(.+)\&dl=0/.exec(href)?.[1]
+            id = /^https:\/\/www.dropbox.com\/(.+)\&dl=0/.exec(href)?.[1]
             type = 'dropbox'
         }
 
@@ -48,7 +48,7 @@ for (const post of posts) {
                 </iframe>`
                 :
                 `<video controls preview='metadata'>
-                    <source src='${m.id}&raw=1'/>
+                    <source src='https://dl.dropbox.com/${m.id}&dl=1'/>
                     Your browser does not support this content
                 </video>`
             }
