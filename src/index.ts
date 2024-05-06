@@ -38,7 +38,6 @@ for (const post of posts) {
     post.insertAdjacentHTML('afterend',
         `<div class='ivelt-media__root'>
         ${media.map(m => `<div class='container'>
-            <div class='skeleton'></div>
             ${m.type === 'google-drive' ?
                 `<iframe 
                     src='https://drive.google.com/file/d/${m.id}/preview' 

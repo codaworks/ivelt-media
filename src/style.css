@@ -5,7 +5,7 @@
     border-left: solid #60a5fa 3px;
     background: #dbeafe;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 1rem;
 
     .container {
@@ -16,15 +16,7 @@
         aspect-ratio: 16 / 9;
     }
 
-    .skeleton {
-        position: absolute;
-        inset: 0;
-        background: rgb(208 213 221);
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-
     iframe,
-
     video {
         z-index: 10;
         display: block;
@@ -32,11 +24,6 @@
         inset: 0;
         width: 100%;
         height: 100%;
-    }
-}
-
-@keyframes pulse {
-    50% {
-        opacity: .5;
+        background: black;
     }
 }
