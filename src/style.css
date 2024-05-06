@@ -26,4 +26,13 @@
         height: 100%;
         background: black;
     }
+
+    /* Audio overrides */
+    .container:has(video[filename$=".mp3"]) {
+        height: 50px;
+    }
+
+    video[filename$=".mp3"] {
+        background: transparent;
+    }
 }
