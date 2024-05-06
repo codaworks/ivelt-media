@@ -43,8 +43,6 @@ for (const post of posts) {
                 `<iframe 
                     src='https://drive.google.com/file/d/${m.id}/preview' 
                     frameborder='0' 
-                    width='300'
-                    height='169'
                     allowfullscreen>
                     Your browser does not support this content
                 </iframe>`
