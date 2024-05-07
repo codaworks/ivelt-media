@@ -63,12 +63,14 @@ for (const post of posts) {
     post.insertAdjacentHTML('afterend',
         `<div class='ivelt-media__root'>
         ${media.map(m => `
-        <div class="links">
-            <a class="button"
-                href=${m.type === 'google-drive' ? `https://drive.google.com/uc?export=download&id=${m.id}`:`https://www.dropbox.com/scl/fi/${m.id}&dl=1`}>
-            <i class="icon fa-download"></i> דאונלאויד</a>
-        </div>
-        <div class='container'>
+            <div class='links'>
+                <a class='button'
+                    href=${m.type === 'google-drive' ? 
+                    `https://drive.google.com/uc?export=download&id=${m.id}`:
+                    `https://www.dropbox.com/scl/fi/${m.id}&dl=1`}>
+                <i class='icon fa-download'></i> דאונלאויד</a>
+            </div>
+            <div class='container'>
             ${m.type === 'google-drive' ?
                 `<iframe 
                     src='https://drive.google.com/file/d/${m.id}/preview' 
