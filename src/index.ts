@@ -2,7 +2,6 @@ interface Media {
     title: string
     href: string
     id: string
-    token?: string
     filename?: string
     type: "google-drive" | "dropbox"
 }
@@ -24,7 +23,6 @@ for (const post of posts) {
 
         let id: string
         let type: 'google-drive' | 'dropbox'
-        let token: string | undefined
         let filename: string | undefined
 
         if (href.startsWith('https://drive.google.com')) {
@@ -37,9 +35,8 @@ for (const post of posts) {
         else if (href.startsWith('https://www.dropbox.com')) {
             const match = /^https:\/\/www.dropbox.com\/scl\/fi\/([^/]+)\/(.+?)\?(.+)\&dl=0/.exec(href)!
 
-            token = match[1]
             filename = match[2]
-            id = `${token}/${filename}?${match[3]}`
+            id = `${match[1]}/${filename}?${match[3]}`
 
             type = 'dropbox'
         }
@@ -52,7 +49,6 @@ for (const post of posts) {
             title: l.textContent ?? href,
             href,
             id,
-            token,
             filename,
             type
         }
