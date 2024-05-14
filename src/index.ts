@@ -12,8 +12,8 @@ for (const post of posts) {
     const links = post.querySelectorAll(`
     .content > a[href^="https://drive.google.com/file/d/"],
     .content > :not(blockquote) a[href^="https://drive.google.com/file/d/"],
-    .content > a[href^="https://www.dropbox.com/scl/fi/"][href$="&dl=0"]:is([href*=".mp3"], [href*=".mp4"], [href*=".m4a"], [href*=".m4v"], [href*="webm"]), 
-    .content > :not(blockquote) a[href^="https://www.dropbox.com"][href$="&dl=0"]:is([href*=".mp3"], [href*=".mp4"], [href*=".m4a"], [href*=".m4v"], [href*="webm"])
+    .content > a[href^="https://www.dropbox.com/scl/fi/"][href$="&dl=0"]:is([href*=".mp3"], [href*=".mp4"],  [href*=".mov"], [href*=".m4a"], [href*=".m4v"], [href*="webm"]), 
+    .content > :not(blockquote) a[href^="https://www.dropbox.com"][href$="&dl=0"]:is([href*=".mp3"], [href*=".mp4"], [href*=".mov"], [href*=".m4a"], [href*=".m4v"], [href*="webm"])
     `)
     if (!links.length)
         continue
