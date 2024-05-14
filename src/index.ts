@@ -12,7 +12,7 @@ for (const post of posts) {
     const links = post.querySelectorAll(`
     .content > a[href^="https://drive.google.com/file/d/"],
     .content > :not(blockquote) a[href^="https://drive.google.com/file/d/"],
-    .content > a[href^="https://www.dropbox.com/scl/fi/"][href$="&dl=0"]:is([href*=".mp3"], [href*=".mp4"], [href*=".mov"], [href*=".m4a"], [href*=".m4v"], [href*="webm"]), 
+    .content > a[href^="https://www.dropbox.com/scl/fi/"][href$="&dl=0"]:is([href*=".mp3"], [href*=".mp4"], [href*=".mov"], [href*=".m4a"], [href*=".m4v"], [href*="webm"]),
     .content > :not(blockquote) a[href^="https://www.dropbox.com"][href$="&dl=0"]:is([href*=".mp3"], [href*=".mp4"], [href*=".mov"], [href*=".m4a"], [href*=".m4v"], [href*="webm"])
     `)
     if (!links.length)
@@ -61,27 +61,24 @@ for (const post of posts) {
         ${media.map(m => `
             <div class='links'>
                 <a class='button'
-                    href=${m.type === 'google-drive' ? 
+                    href=${m.type === 'google-drive' ?
                     `https://drive.google.com/uc?export=download&id=${m.id}`:
                     `https://www.dropbox.com/scl/fi/${m.id}&dl=1`}>
                 <i class='icon fa-download'></i> דאונלאויד</a>
             </div>
             <div class='container'>
-            ${m.type === 'google-drive' ?
-                `<iframe 
-                    src='https://drive.google.com/file/d/${m.id}/preview' 
-                    frameborder='0' 
+                <iframe
+                    src=${m.type === 'google-drive' ?
+                        `https://drive.google.com/file/d/${m.id}/preview`:
+                        `https://www.dropbox.com/scl/fi/${m.id}&raw=1`}
+                    frameborder='0'
                     loading='lazy'
                     scrolling='no'
                     allowfullscreen>
                     Your browser does not support this content
-                </iframe>`
-                :
-                `<video controls preview='metadata' filename=${m.filename}>
-                    <source src='https://www.dropbox.com/scl/fi/${m.id}&dl=1'/>
-                    Your browser does not support this content
-                </video>`
-            }
+                </iframe>
+
+
         </div>`).join('')}
     </div>`)
 }
