@@ -78,7 +78,7 @@ for (const post of posts) {
                 </iframe>`
                 :
                 `<video controls preview='metadata' filename=${m.filename}>
-                    <source src='https://dl.dropbox.com/scl/fi/${m.id}'/>
+                    <source src='https://www.dropbox.com/scl/fi/${m.id}&dl=1'/>
                     Your browser does not support this content
                 </video>`
             }
