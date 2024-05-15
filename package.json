@@ -1,7 +1,7 @@
 {
   "name": "ivelt-media",
   "displayName": "Ivelt Media",
-  "version": "0.2.3.1",
+  "version": "0.2.3.2",
   "author": "Mordechai Meisels",
   "description": "Adds embedded media players for linked media in ivelt.com posts.",
   "type": "module",

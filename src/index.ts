@@ -76,7 +76,7 @@ for (const post of posts) {
                 :
                 `<video
                     id=vid-${post.parentElement?.id}-${index}
-                    class="video-js"
+                    class="video-js vjs-16-9"
                     controls
                     preload="auto"
                   >
@@ -97,7 +97,7 @@ for (const post of posts) {
 
 for (const videoElement of document.getElementsByClassName('video-js')) {
   videojs(videoElement.id ,{
-    responsive: true
+  'fluid' : true
   })
 }
 
