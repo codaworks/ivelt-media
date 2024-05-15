@@ -1,5 +1,5 @@
 .ivelt-media__root {
-  all: unset;
+  /*all: unset;*/
   margin-top: 1.5rem;
   padding: 0.75rem;
   border-left: solid #60a5fa 3px;
@@ -15,29 +15,36 @@
   }
 
   .container {
-    display: flex;
-    width: 100%;
-    aspect-ratio: 16 / 9;
+      /*margin:0;*/
+      /*padding:0;*/
+      /*background-color:rgb(38,38,38);*/
+      /*height:100%;*/
+      /*width:100%;*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    /*aspect-ratio: 16 / 9;*/
   }
 
-  iframe,
-  video {
+  iframe
+  {
     display: block;
     inset: 0;
     width: 100%;
     height: 100%;
+    min-height: 480px;
     max-width: 100%;
-    max-height: 100%;
+    max-height: 700px;
     background: black;
   }
 
-  /* Audio overrides */
-  .container:has(video[filename$='.mp3'], video[filename$='.m4a']) {
-    height: 50px;
-  }
+  /*!* Audio overrides *!*/
+  /*.container:has(video[filename$='.mp3'], video[filename$='.m4a']) {*/
+  /*  height: 50px;*/
+  /*}*/
 
-  video[filename$='.mp3'],
-  video[filename$='.m4a'] {
-    background: transparent;
-  }
+  /*video[filename$='.mp3'],*/
+  /*video[filename$='.m4a'] {*/
+  /*  background: transparent;*/
+  /*}*/
 }
