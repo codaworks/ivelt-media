@@ -3,7 +3,7 @@ interface Media {
     href: string
     id: string
     filename?: string
-    type: "google-drive" | "dropbox"
+    type: 'google-drive' | 'dropbox'
 }
 
 const posts = document.querySelectorAll('.postprofile + .postbody .content, #preview .postbody .content')
@@ -15,8 +15,7 @@ for (const post of posts) {
     .content > a[href^="https://www.dropbox.com/scl/fi/"][href$="&dl=0"]:is([href*=".mp3"], [href*=".mp4"], [href*=".mov"], [href*=".m4a"], [href*=".m4v"], [href*="webm"]), 
     .content > :not(blockquote) a[href^="https://www.dropbox.com"][href$="&dl=0"]:is([href*=".mp3"], [href*=".mp4"], [href*=".mov"], [href*=".m4a"], [href*=".m4v"], [href*="webm"])
     `)
-    if (!links.length)
-        continue
+    if (!links.length) continue
 
     const media = [...links].map(l => {
         const href = l.getAttribute('href') as string
@@ -30,20 +29,14 @@ for (const post of posts) {
 
             id = match[1]
             type = 'google-drive'
-        }
-
-        else if (href.startsWith('https://www.dropbox.com')) {
+        } else if (href.startsWith('https://www.dropbox.com')) {
             const match = /^https:\/\/www.dropbox.com\/scl\/fi\/([^/]+)\/(.+?)\?(.+)\&dl=0/.exec(href)!
 
             filename = match[2]
             id = `${match[1]}/${filename}?${match[3]}`
 
             type = 'dropbox'
-        }
-
-        else
-            throw Error('Unknown media type')
-
+        } else throw Error('Unknown media type')
 
         return {
             title: l.textContent ?? href,
@@ -54,21 +47,25 @@ for (const post of posts) {
         }
     })
 
-
-
-    post.insertAdjacentHTML('afterend',
+    post.insertAdjacentHTML(
+        'afterend',
         `<div class='ivelt-media__root'>
-        ${media.map(m => `
+        ${media
+            .map(
+                m => `
             <div class='links'>
                 <a class='button'
-                    href=${m.type === 'google-drive' ? 
-                    `https://drive.google.com/uc?export=download&id=${m.id}`:
-                    `https://www.dropbox.com/scl/fi/${m.id}&dl=1`}>
+                    href=${
+                        m.type === 'google-drive'
+                            ? `https://drive.google.com/uc?export=download&id=${m.id}`
+                            : `https://www.dropbox.com/scl/fi/${m.id}&dl=1`
+                    }>
                 <i class='icon fa-download'></i> דאונלאויד</a>
             </div>
             <div class='container'>
-            ${m.type === 'google-drive' ?
-                `<iframe 
+            ${
+                m.type === 'google-drive'
+                    ? `<iframe 
                     src='https://drive.google.com/file/d/${m.id}/preview' 
                     frameborder='0' 
                     loading='lazy'
@@ -76,12 +73,14 @@ for (const post of posts) {
                     allowfullscreen>
                     Your browser does not support this content
                 </iframe>`
-                :
-                `<video controls preview='metadata' filename=${m.filename}>
+                    : `<video controls preview='metadata' filename=${m.filename}>
                     <source src='https://www.dropbox.com/scl/fi/${m.id}&dl=1'/>
                     Your browser does not support this content
                 </video>`
             }
-        </div>`).join('')}
-    </div>`)
+        </div>`
+            )
+            .join('')}
+    </div>`
+    )
 }
